@@ -1,0 +1,170 @@
+/* Reset default margins and paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Set a background color and font for the whole page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fafafa;
+}
+
+/* Header Styles */
+header {
+    background-color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#profile-items {
+    display: flex;
+    align-items: center;
+}
+
+#user-image {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+#user-profile {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    position: relative;
+}
+
+#user-menu {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    list-style-type: none;
+    padding: 5px 0;
+    right: 0;
+    top: 100%;
+    display: none;
+}
+
+#user-menu li {
+    text-align: center;
+    margin: 5px 0;
+}
+
+#user-profile:hover #user-menu {
+    display: block;
+}
+
+/* Search Form Styles */
+form {
+    display: flex;
+}
+
+input[type="text"] {
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    width: 200px;
+}
+
+button {
+    padding: 5px 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+/* Navigation Styles */
+nav ul {
+    list-style-type: none;
+}
+
+nav ul li {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 18px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    color: #555;
+}
+
+/* Main Content Styles */
+main {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+/* Add this CSS to your existing stylesheet or create a new one */
+
+.post {
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+}
+
+.post-header img {
+    width: 40px; /* Adjust as needed */
+    height: 40px; /* Adjust as needed */
+    margin-right: 10px;
+}
+
+.author {
+    font-weight: bold;
+}
+
+.content {
+    margin-top: 10px;
+}
+
+.date {
+    font-style: italic;
+}
+
+.interactions {
+    margin-top: 10px;
+}
+
+.like-button,
+.comment-button {
+    background-color: #0095f6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 20px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+/* Additional styles for like and comment buttons can be added as needed */

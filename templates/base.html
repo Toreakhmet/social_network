@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <title>{% block title %}{% endblock %}</title>
+    {% block style %}{% endblock %}
+    <style>
+
+
+    </style>
+</head>
+
+<body>
+    <header> 
+        <h1>PomBO</h1>
+        <div id="profile-items">
+            <img src="{% static 'images/No_Profile.png' %}" alt="photo-user" id="user-image">
+            <span id="user-profile">{{ user }} {% if user.is_authenticated %}&blacktriangledown;
+                <ul id="user-menu">
+                    <li><a href="">Profile</a></li>
+                    <li><a href="">My Music</a></li>
+                    <li><a href="">Settings</a></li>
+                </ul>
+            {% else %}
+        {% endif %}</span>
+        </div>
+        <form action="">
+            <input type="text" placeholder="Search Posts">
+            <button>Enter</button>
+        </form>
+        <nav>
+            <ul>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+                <li><a href="">Chat with Friends |</a></li>
+                <li><a href="">All Musics |</a></li>
+                <li><a href="{% url 'post' %}">Add a new post |</a></li>
+                <li><a href="">Videos |</a></li>
+                {% else %}
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'register' %}">Register</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block body %}{% endblock %}
+    </main>
+<script src="{% static 'js/js.js' %}">
+
+</script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'cs/search.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>search</title>
+    <style>/* search.css */
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fafafa;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        form {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        input[type="text"] {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        
+        input[type="submit"] {
+            background-color: #0095f6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 20px;
+            cursor: pointer;
+        }
+        
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        li {
+            margin-bottom: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        p, a {
+            margin: 0;
+            font-size: 16px;
+        }
+        
+        img {
+            max-width: 100%;
+            border-radius: 5px;
+        }
+        </style>
+</head>
+<body>
+    <form action="{% url 'home' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="q" placeholder="Поиск">
+        <input type="submit" value="Найти">
+    </form>
+    <h1><a href="{% url 'home' %}">HOme</a></h1>
+    {% if results %}
+    <ul>
+    {% for result in results %}
+        <li>
+            <p>{{ result.content }}</p>
+            <p>{{ result.author }}</p>
+            <img src="{{ result.images }}" alt="">
+            <video width="320" height="240" controls>
+                <source src="{% if result.video %}{{ result.video.url }}{% endif %}" type="video/mp4">
+                Ваш браузер не поддерживает видео.
+           </video> 
+           <p>{{ result.content }}</p>
+            <a href="/users/{{ result.id }}">{{ result.username }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p>Не найдено ни одного результата.</p>
+    {% endif %}
+</body>
+</html>

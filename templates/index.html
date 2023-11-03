@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <title>{% block title %}{% endblock %}</title>
+    {% block style %}{% endblock %}
+    <style>
+        
+        input[type="text"] {
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        input[type="submit"] {
+            margin-bottom: 10px;
+        }
+
+        .search-results {
+            list-style: none;
+            padding: 0;
+        }
+
+        .search-results li {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .end{
+            display: flex;
+
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>PomBO</h1>
+        <div id="profile-items">
+            <img src="{% if user.is_authenticated %}{% if user.profile_image %}{{ user.profile_image.url }}{% else %}{% static 'images/No_Profile.png' %}{% endif %}{% else %}{% static 'images/No_Profile.png' %}{% endif %}" alt="photo-user" id="user-image">            <span id="user-profile">{{ user }} {% if user.is_authenticated %}&blacktriangledown;
+                <ul id="user-menu">
+                    <li><a href="">Profile</a></li>
+                    <li><a href="">My Music</a></li>
+                    <li><a href="">Settings</a></li>
+                </ul>
+            {% else %}
+        {% endif %}</span>
+        </div>
+        <form action="{% url 'home' %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="q" placeholder="Поиск">
+            <input type="submit" value="Найти">
+        </form>
+        
+        <nav>
+            <ul>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+                <li><a href="">Chat with Friends |</a></li>
+                <li><a href="">All Musics |</a></li>
+                <li><a href="{% url 'post' %}">Add a new post |</a></li>
+                <li><a href="">Videos |</a></li>
+                {% else %}
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'register' %}">Register</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% for post in Posts %}
+        <div class="post">
+            <div class="end">
+                <div class="post-header">
+                    <img src="{{ post.images.url }}" alt="Изображение">
+                </div>
+                <div>
+                {% if post.video %}
+                    <video width="320" height="300px" controls>
+                        <source src="{{ post.video.url }}" type="video/mp4" height="300">
+                        Ваш браузер не поддерживает видео.
+                    </video>
+                {% endif %}
+                </div>
+            </div>
+            <p class="content">{{ post.content }}</p>
+            <p class="date">Дата создания: {{ post.created_at }} <span class="author">{{ post.author.username }}</span></p>
+            <div class="interactions">
+                <button class="like-button">Like</button>
+                <button class="comment-button">Comment</button>
+            </div>
+        </div>
+        {% endfor %}
+    </main>
+    
+<script src="{% static 'js/js.js' %}">
+
+</script>
+</body>
+</html>
