@@ -44,7 +44,7 @@ MIDDLEWARE = [
 ]
 ELASTICSEARCH_DSL = {
     'default': {
-        'hosts': 'http://localhost:9200',  # Указываете здесь ваш URL Elasticsearch сервера
+        'hosts': 'http://localhost:9200',  
     },
 }
 
